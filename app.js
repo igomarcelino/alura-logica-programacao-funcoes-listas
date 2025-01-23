@@ -19,7 +19,7 @@ function gerarNumeroAleatorio() {
 let numeroAleatorio = gerarNumeroAleatorio();
 console.log(numeroAleatorio);
 
-let intervaloNumeros = parseInt(numeroAleatorio * 8 / 3);
+let intervaloNumeros = gerarIntervalo();
 
 console.log(jogadores);
 
@@ -59,19 +59,9 @@ function verificarChute() {
     }
 }
 
-
-
-function reiniciarJogo() {
-    numeroAleatorio = gerarNumeroAleatorio();
-    limparCampo();
-    tentativas = 1;
-    nJogador = 0;
-    exibirMensagemInicial();
-}
-
 function exibirMensagemInicial() {
     exibirTextoNaTela("h1", "Jogo do Numero Secreto");
-    exibirTextoNaTela("p", `Escolha um numero entre 1 e ${intervaloNumeros}`);
+    exibirTextoNaTela("p", `Informando jogadores`);
 }
 
 function capturarNomeJogador(){
@@ -109,6 +99,23 @@ function iniciarJogo() {
     nJogador = 0;
 }
 
+
+function reiniciarJogo() {
+    numeroAleatorio = gerarNumeroAleatorio();
+    intervaloNumeros = gerarIntervalo();
+    limparCampo();
+    tentativas = 1;
+    nJogador = 0;
+    exibirMensagemInicial();
+    while(jogadores.length){
+        jogadores.pop();
+    }
+    exibirTextoNaTela("h3", `Insira outro jogador`)
+    showElements();
+    exibirTextoNaTela("p", `Informando jogadores`);
+}
+
+
 function hidenElements(){
     h3Jogadores.setAttribute("hidden",true);
     inputJogador.setAttribute("style","display:none");
@@ -118,7 +125,7 @@ function hidenElements(){
 
 function showElements(){
     h3Jogadores.removeAttribute("hidden");
-    inputJogador.removeAttribute("hidden");
+    inputJogador.removeAttribute("style");
     botaoEnviar.removeAttribute("hidden");
     botaoIniciar.removeAttribute("hidden");
 }
@@ -134,5 +141,7 @@ function limparCampo() {
     showElements();
 }
 
-
+function gerarIntervalo(){
+    return parseInt(numeroAleatorio * 8 / 3);
+}
 
